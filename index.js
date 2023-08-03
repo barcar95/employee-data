@@ -25,13 +25,41 @@ function primaryPathway() {
             type: 'list',
             name: 'options',
             message: 'What would you like to do?',
-            choice: ["View All departments", "View All roles", "View All employees", "Add a department", "Add a role", "Add an employee", "Update an employee"
+            choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "Update an employee"
             ]
         }
     ])
-    .then((answers) => {
-        if (answers.options === "View All departments"){
-            // execute view all department function
-        }
-    })
+        .then((answers) => {
+            if (answers.options === "View all departments") {
+                // execute view all department function
+                viewDepartment();
+            } else if (answers.options === "View all roles"){
+                // execute view all roles function
+                viewRoles();
+            } else if (answers.options === "view all employees"){
+                // execute view all employees function
+                viewEmployees()
+            }
+        })
+}
+
+function viewDepartment() {
+    db.query('SELECT * FROM department', function (err, results) {
+        console.table(results);
+        primaryPathway();
+    });
+}
+
+function viewRoles() {
+    db.query('SELECT * FROM role', function (err, results) {
+        console.table(results);
+        primaryPathway();
+    });
+}
+
+function viewEmployees() {
+    db.query('SELECT * FROM employee', function (err, results) {
+        console.table(results);
+        primaryPathway();
+    });
 }
