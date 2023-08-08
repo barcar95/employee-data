@@ -92,10 +92,14 @@ function addDepartment() {
         const sql = `INSERT INTO department (name) VALUES (?)`
         const params = [answer.addDep];
         db.query(sql, params, (err, results) => {
-            viewDepartment();
+            console.log(err);
+            db.query('SELECT * FROM department', function (err, results) {
+                console.log();
+                console.table(results);
             primaryPathway();
         })
     })
+})
 }
 
 async function addRole(){
@@ -123,7 +127,10 @@ async function addRole(){
         const params = [answer1, answer2, answer3]
         db.query(sql, params, (err, result) => {
             console.log(err);
-            viewRoles();
+            db.query('SELECT * FROM role', function (err, results) {
+                console.log();
+                console.table(results);
+            });
             primaryPathway();
         })
     })
@@ -163,7 +170,10 @@ async function addEmp(){
         const params = [answer1, answer2, answer3, answer4]
         db.query(sql, params, (err, result) => {
             console.log(err);
-            viewEmployees();
+            db.query('SELECT * FROM employee', function (err, results) {
+                console.log();
+                console.table(results);
+            });
             primaryPathway();
         })
     })
@@ -205,7 +215,10 @@ async function updateEmpRole() {
         const params = [roleID, empID]
         db.query(sql, params, (err, result) => {
             console.log(err);
-            viewEmployees();
+            db.query('SELECT * FROM employee', function (err, results) {
+                console.log();
+                console.table(results);
+            });
             primaryPathway();
         })
     })
